@@ -1,4 +1,2 @@
-# Aplikacje-bazodanowe
-# PostgreSQL
-# C
-# Yauheni Dzianisau
+# Aplikacje-bazodanowe</br>
+Yauheni Dzianisau
