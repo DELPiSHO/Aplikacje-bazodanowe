@@ -1,0 +1,51 @@
+﻿@model IEnumerable<projectMVC_game.Models.wypozyczenie>
+
+@{
+    ViewBag.Title = "Lista wszystkich wypozyczen";
+}
+
+<h2>Lista wszystkich wypozyczen</h2>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr class="w3-red">
+        <th>
+            @Html.DisplayNameFor(model => model.data_wypozyczenia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gra.nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.klient.imie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pracownik.imie)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.data_wypozyczenia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gra.nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.klient.imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pracownik.imie)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_wypozyczenie }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_wypozyczenie }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_wypozyczenie })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model projectMVC_game.Models.adres
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>adres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.panstwo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.panstwo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.miasto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.miasto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ulica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ulica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nr_domu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nr_domu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nr_pokoju)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nr_pokoju)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_adres }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

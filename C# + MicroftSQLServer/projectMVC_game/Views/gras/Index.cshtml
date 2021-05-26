@@ -1,0 +1,67 @@
+﻿@model IEnumerable<projectMVC_game.Models.gra>
+
+@{
+    ViewBag.Title = "Lista wszystkich gier";
+}
+
+<h2>Lista wszystkich gier</h2>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr class="w3-red">
+        <th>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ograniczenie_wiekowe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gatunek)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.platforma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.release_year)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ograniczenie_wiekowe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gatunek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.platforma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cena)
+                <text>$</text>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.release_year)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_gra }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_gra }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_gra })
+            </td>
+        </tr>
+
+    }
+</table>
+
+

@@ -1,0 +1,58 @@
+﻿@model projectMVC_game.Models.wypozyczenie
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>wypozyczenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.data_wypozyczenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_wypozyczenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gra.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gra.nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.klient.imie)
+            <text>klienta</text>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.klient.imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pracownik.imie)
+            <text>pracownika</text>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pracownik.imie)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

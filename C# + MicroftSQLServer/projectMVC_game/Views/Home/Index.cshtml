@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Dzien dobry w wypozyczalni gier";
+}
+
+<div class="jumbotron">
+    <h1>wypozyczalnia gier</h1>
+    <p class="lead">Wypozyczalnia gier dla wszystkich kto lubi dobre gry i po wspanialej cenie</p>
+</div>   
+        
+          
+        <div class="row">
+            <div class="col-md-4">
+                <h2> @Html.ActionLink("Lista adresow", "Index", "adres")</h2>
+                <p>
+                    Lista wszystkich adresow klientow oraz pracownikow.
+                </p>
+                
+            </div>
+            <div class="col-md-4">
+                <h2>@Html.ActionLink("Lista klientow", "Index", "klients")</h2>
+                <p>Tu znajduje sie lista klientwo ktore wypozyczaja gry w wypozyczalni</p>
+                
+            </div>
+            <div class="col-md-4">
+                <h2>@Html.ActionLink("Lista pracownikow", "Index", "pracowniks")</h2>
+                <p>Tu znajduje sie lista pracownikow ktore pracuja w wypozyczalni</p>
+                
+            </div>
+            <div class="col-md-4">
+                <h2> @Html.ActionLink("Lista gier", "Index", "gras")</h2>
+                <p>Lista wszystkich gier.</p>
+                
+            </div>
+            <div class="col-md-4">
+                <h2> @Html.ActionLink("Lista wypozyczen", "Index", "wypozyczenies")</h2>
+                <p>Lista wszystkich wypozyczen. </p>
+                
+            </div>
+        </div>
+        

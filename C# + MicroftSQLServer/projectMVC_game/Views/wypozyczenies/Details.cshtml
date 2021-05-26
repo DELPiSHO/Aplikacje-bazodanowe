@@ -1,0 +1,54 @@
+﻿@model projectMVC_game.Models.wypozyczenie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>wypozyczenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.data_wypozyczenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_wypozyczenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gra.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gra.nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.klient.imie)
+            <text>klienta</text>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.klient.imie)
+            
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pracownik.imie)
+            <text>pracownika</text>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pracownik.imie)
+            
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_wypozyczenie }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

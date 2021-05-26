@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="project_gameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="adres">
+          <Key>
+            <PropertyRef Name="id_adres" />
+          </Key>
+          <Property Name="id_adres" Type="int" Nullable="false" />
+          <Property Name="panstwo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="miasto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ulica" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nr_domu" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nr_pokoju" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="gra">
+          <Key>
+            <PropertyRef Name="id_gra" />
+          </Key>
+          <Property Name="id_gra" Type="int" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ograniczenie_wiekowe" Type="int" Nullable="false" />
+          <Property Name="gatunek" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="platforma" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cena" Type="float" Nullable="false" />
+          <Property Name="release_year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="klient">
+          <Key>
+            <PropertyRef Name="id_klient" />
+          </Key>
+          <Property Name="id_klient" Type="int" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pesel" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_adres" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pracownik">
+          <Key>
+            <PropertyRef Name="id_pracownik" />
+          </Key>
+          <Property Name="id_pracownik" Type="int" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pesel" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_adres" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wypozyczenie">
+          <Key>
+            <PropertyRef Name="id_wypozyczenie" />
+          </Key>
+          <Property Name="id_wypozyczenie" Type="int" Nullable="false" />
+          <Property Name="data_wypozyczenia" Type="date" Nullable="false" />
+          <Property Name="id_gra" Type="int" Nullable="false" />
+          <Property Name="id_pracownik" Type="int" Nullable="false" />
+          <Property Name="id_klient" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_klient_adres">
+          <End Role="adres" Type="Self.adres" Multiplicity="1" />
+          <End Role="klient" Type="Self.klient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adres">
+              <PropertyRef Name="id_adres" />
+            </Principal>
+            <Dependent Role="klient">
+              <PropertyRef Name="id_adres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pracownik_adres">
+          <End Role="adres" Type="Self.adres" Multiplicity="1" />
+          <End Role="pracownik" Type="Self.pracownik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adres">
+              <PropertyRef Name="id_adres" />
+            </Principal>
+            <Dependent Role="pracownik">
+              <PropertyRef Name="id_adres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_wypozyczenie_gra">
+          <End Role="gra" Type="Self.gra" Multiplicity="1" />
+          <End Role="wypozyczenie" Type="Self.wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gra">
+              <PropertyRef Name="id_gra" />
+            </Principal>
+            <Dependent Role="wypozyczenie">
+              <PropertyRef Name="id_gra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_wypozyczenie_klient">
+          <End Role="klient" Type="Self.klient" Multiplicity="1" />
+          <End Role="wypozyczenie" Type="Self.wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klient">
+              <PropertyRef Name="id_klient" />
+            </Principal>
+            <Dependent Role="wypozyczenie">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_wypozyczenie_pracownik">
+          <End Role="pracownik" Type="Self.pracownik" Multiplicity="1" />
+          <End Role="wypozyczenie" Type="Self.wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pracownik">
+              <PropertyRef Name="id_pracownik" />
+            </Principal>
+            <Dependent Role="wypozyczenie">
+              <PropertyRef Name="id_pracownik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="project_gameModelStoreContainer">
+          <EntitySet Name="adres" EntityType="Self.adres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gra" EntityType="Self.gra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klient" EntityType="Self.klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pracownik" EntityType="Self.pracownik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wypozyczenie" EntityType="Self.wypozyczenie" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_klient_adres" Association="Self.FK_klient_adres">
+            <End Role="adres" EntitySet="adres" />
+            <End Role="klient" EntitySet="klient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pracownik_adres" Association="Self.FK_pracownik_adres">
+            <End Role="adres" EntitySet="adres" />
+            <End Role="pracownik" EntitySet="pracownik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_wypozyczenie_gra" Association="Self.FK_wypozyczenie_gra">
+            <End Role="gra" EntitySet="gra" />
+            <End Role="wypozyczenie" EntitySet="wypozyczenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_wypozyczenie_klient" Association="Self.FK_wypozyczenie_klient">
+            <End Role="klient" EntitySet="klient" />
+            <End Role="wypozyczenie" EntitySet="wypozyczenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_wypozyczenie_pracownik" Association="Self.FK_wypozyczenie_pracownik">
+            <End Role="pracownik" EntitySet="pracownik" />
+            <End Role="wypozyczenie" EntitySet="wypozyczenie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="project_gameModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="adres">
+          <Key>
+            <PropertyRef Name="id_adres" />
+          </Key>
+          <Property Name="id_adres" Type="Int32" Nullable="false" />
+          <Property Name="panstwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ulica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nr_domu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nr_pokoju" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="klients" Relationship="Self.FK_klient_adres" FromRole="adres" ToRole="klient" />
+          <NavigationProperty Name="pracowniks" Relationship="Self.FK_pracownik_adres" FromRole="adres" ToRole="pracownik" />
+        </EntityType>
+        <EntityType Name="gra">
+          <Key>
+            <PropertyRef Name="id_gra" />
+          </Key>
+          <Property Name="id_gra" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ograniczenie_wiekowe" Type="Int32" Nullable="false" />
+          <Property Name="gatunek" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="platforma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cena" Type="Double" Nullable="false" />
+          <Property Name="release_year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="wypozyczenies" Relationship="Self.FK_wypozyczenie_gra" FromRole="gra" ToRole="wypozyczenie" />
+        </EntityType>
+        <EntityType Name="klient">
+          <Key>
+            <PropertyRef Name="id_klient" />
+          </Key>
+          <Property Name="id_klient" Type="Int32" Nullable="false" />
+          <Property Name="imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pesel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_adres" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="adres" Relationship="Self.FK_klient_adres" FromRole="klient" ToRole="adres" />
+          <NavigationProperty Name="wypozyczenies" Relationship="Self.FK_wypozyczenie_klient" FromRole="klient" ToRole="wypozyczenie" />
+        </EntityType>
+        <EntityType Name="pracownik">
+          <Key>
+            <PropertyRef Name="id_pracownik" />
+          </Key>
+          <Property Name="id_pracownik" Type="Int32" Nullable="false" />
+          <Property Name="imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pesel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_adres" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="adres" Relationship="Self.FK_pracownik_adres" FromRole="pracownik" ToRole="adres" />
+          <NavigationProperty Name="wypozyczenies" Relationship="Self.FK_wypozyczenie_pracownik" FromRole="pracownik" ToRole="wypozyczenie" />
+        </EntityType>
+        <EntityType Name="wypozyczenie">
+          <Key>
+            <PropertyRef Name="id_wypozyczenie" />
+          </Key>
+          <Property Name="id_wypozyczenie" Type="Int32" Nullable="false" />
+          <Property Name="data_wypozyczenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_gra" Type="Int32" Nullable="false" />
+          <Property Name="id_pracownik" Type="Int32" Nullable="false" />
+          <Property Name="id_klient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="gra" Relationship="Self.FK_wypozyczenie_gra" FromRole="wypozyczenie" ToRole="gra" />
+          <NavigationProperty Name="klient" Relationship="Self.FK_wypozyczenie_klient" FromRole="wypozyczenie" ToRole="klient" />
+          <NavigationProperty Name="pracownik" Relationship="Self.FK_wypozyczenie_pracownik" FromRole="wypozyczenie" ToRole="pracownik" />
+        </EntityType>
+        <Association Name="FK_klient_adres">
+          <End Role="adres" Type="project_gameModel.adres" Multiplicity="1" />
+          <End Role="klient" Type="Self.klient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adres">
+              <PropertyRef Name="id_adres" />
+            </Principal>
+            <Dependent Role="klient">
+              <PropertyRef Name="id_adres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pracownik_adres">
+          <End Role="adres" Type="project_gameModel.adres" Multiplicity="1" />
+          <End Role="pracownik" Type="Self.pracownik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adres">
+              <PropertyRef Name="id_adres" />
+            </Principal>
+            <Dependent Role="pracownik">
+              <PropertyRef Name="id_adres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_wypozyczenie_gra">
+          <End Role="gra" Type="Self.gra" Multiplicity="1" />
+          <End Role="wypozyczenie" Type="Self.wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gra">
+              <PropertyRef Name="id_gra" />
+            </Principal>
+            <Dependent Role="wypozyczenie">
+              <PropertyRef Name="id_gra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_wypozyczenie_klient">
+          <End Role="klient" Type="Self.klient" Multiplicity="1" />
+          <End Role="wypozyczenie" Type="Self.wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klient">
+              <PropertyRef Name="id_klient" />
+            </Principal>
+            <Dependent Role="wypozyczenie">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_wypozyczenie_pracownik">
+          <End Role="pracownik" Type="Self.pracownik" Multiplicity="1" />
+          <End Role="wypozyczenie" Type="Self.wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pracownik">
+              <PropertyRef Name="id_pracownik" />
+            </Principal>
+            <Dependent Role="wypozyczenie">
+              <PropertyRef Name="id_pracownik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="project_gameEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="adres1" EntityType="project_gameModel.adres" />
+          <EntitySet Name="gras" EntityType="Self.gra" />
+          <EntitySet Name="klients" EntityType="Self.klient" />
+          <EntitySet Name="pracowniks" EntityType="Self.pracownik" />
+          <EntitySet Name="wypozyczenies" EntityType="Self.wypozyczenie" />
+          <AssociationSet Name="FK_klient_adres" Association="Self.FK_klient_adres">
+            <End Role="adres" EntitySet="adres1" />
+            <End Role="klient" EntitySet="klients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pracownik_adres" Association="Self.FK_pracownik_adres">
+            <End Role="adres" EntitySet="adres1" />
+            <End Role="pracownik" EntitySet="pracowniks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_wypozyczenie_gra" Association="Self.FK_wypozyczenie_gra">
+            <End Role="gra" EntitySet="gras" />
+            <End Role="wypozyczenie" EntitySet="wypozyczenies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_wypozyczenie_klient" Association="Self.FK_wypozyczenie_klient">
+            <End Role="klient" EntitySet="klients" />
+            <End Role="wypozyczenie" EntitySet="wypozyczenies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_wypozyczenie_pracownik" Association="Self.FK_wypozyczenie_pracownik">
+            <End Role="pracownik" EntitySet="pracowniks" />
+            <End Role="wypozyczenie" EntitySet="wypozyczenies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="project_gameModelStoreContainer" CdmEntityContainer="project_gameEntities">
+          <EntitySetMapping Name="adres1">
+            <EntityTypeMapping TypeName="project_gameModel.adres">
+              <MappingFragment StoreEntitySet="adres">
+                <ScalarProperty Name="id_adres" ColumnName="id_adres" />
+                <ScalarProperty Name="panstwo" ColumnName="panstwo" />
+                <ScalarProperty Name="miasto" ColumnName="miasto" />
+                <ScalarProperty Name="ulica" ColumnName="ulica" />
+                <ScalarProperty Name="nr_domu" ColumnName="nr_domu" />
+                <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gras">
+            <EntityTypeMapping TypeName="project_gameModel.gra">
+              <MappingFragment StoreEntitySet="gra">
+                <ScalarProperty Name="id_gra" ColumnName="id_gra" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="ograniczenie_wiekowe" ColumnName="ograniczenie_wiekowe" />
+                <ScalarProperty Name="gatunek" ColumnName="gatunek" />
+                <ScalarProperty Name="platforma" ColumnName="platforma" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+                <ScalarProperty Name="release_year" ColumnName="release_year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klients">
+            <EntityTypeMapping TypeName="project_gameModel.klient">
+              <MappingFragment StoreEntitySet="klient">
+                <ScalarProperty Name="id_klient" ColumnName="id_klient" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="pesel" ColumnName="pesel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id_adres" ColumnName="id_adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pracowniks">
+            <EntityTypeMapping TypeName="project_gameModel.pracownik">
+              <MappingFragment StoreEntitySet="pracownik">
+                <ScalarProperty Name="id_pracownik" ColumnName="id_pracownik" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="pesel" ColumnName="pesel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id_adres" ColumnName="id_adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wypozyczenies">
+            <EntityTypeMapping TypeName="project_gameModel.wypozyczenie">
+              <MappingFragment StoreEntitySet="wypozyczenie">
+                <ScalarProperty Name="id_wypozyczenie" ColumnName="id_wypozyczenie" />
+                <ScalarProperty Name="data_wypozyczenia" ColumnName="data_wypozyczenia" />
+                <ScalarProperty Name="id_gra" ColumnName="id_gra" />
+                <ScalarProperty Name="id_pracownik" ColumnName="id_pracownik" />
+                <ScalarProperty Name="id_klient" ColumnName="id_klient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

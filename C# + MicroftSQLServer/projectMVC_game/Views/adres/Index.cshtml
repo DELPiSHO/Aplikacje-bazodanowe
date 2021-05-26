@@ -1,0 +1,57 @@
+﻿@model IEnumerable<projectMVC_game.Models.adres>
+
+@{
+    ViewBag.Title = "Lista wszystkich adresow";
+}
+
+<h2>Lista wszystkich adresow</h2>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr class="w3-red">
+        <th>
+            @Html.DisplayNameFor(model => model.panstwo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.miasto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ulica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_domu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_pokoju)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.panstwo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.miasto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ulica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nr_domu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nr_pokoju)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.id_adres }) |
+            @Html.ActionLink("Details", "Details", new { id = item.id_adres }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id_adres })
+        </td>
+    </tr>
+}
+
+</table>
